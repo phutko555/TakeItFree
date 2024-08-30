@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Items</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .welcome-message {
+            margin-bottom: 20px;
+        }
+        .flash-message {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg" style="background-color:#36454f">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color:white">TakeItFree</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart" style="color:#9aa7a1;">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/booked-items" style="color:#9aa7a1;">Booked Items</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <div th:if="${message}" class="flash-message alert" th:classappend="${messageType == 'success' ? 'alert-success' : 'alert-danger'}" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div class="welcome-message alert alert-info" role="alert">
+        <h4 class="alert-heading" th:text="'Welcome, ' + ${username} + '!'">Welcome, User!</h4>
+        <p th:text="'You are logged in as ' + ${role}">You are logged in as Role.</p>
+    </div>
+    <h1 class="mb-4">Available Items for Booking</h1>
+
+    <div class="row">
+
+        <div class="col-md-4" th:each="item : ${items}">
+            <div class="card mb-4">
+                <img th:src="@{${item.imagePath}}" alt="Item Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${item.title}"></h5>
+                    <p class="card-text" style="color:green">Book an item to see the Description</p>
+
+
+                    <form th:action="@{/cart/add/{id}(id=${item.id})}" method="post">
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

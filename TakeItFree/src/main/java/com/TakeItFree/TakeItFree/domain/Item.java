@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,34 +12,20 @@ public class Item {
 
     @Column(columnDefinition = "TEXT")
     private String description;
-    private double price;
 
     private String imagePath;
-private String status;
-    @ManyToOne
-    private User bookedBy;
+    private String status;
 
-    public User getBookedBy() {
-        return bookedBy;
-    }
-
-    public void setBookedBy(User bookedBy) {
-        this.bookedBy = bookedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    private String country;
+    private String city;
+    private String phoneNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User uploader;
 
-    // Getters and setters
+    @ManyToOne
+    private User bookedBy;
 
     public Long getId() {
         return id;
@@ -66,20 +51,20 @@ private String status;
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getImagePath() {
         return imagePath;
     }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public User getUploader() {
@@ -89,6 +74,36 @@ private String status;
     public void setUploader(User uploader) {
         this.uploader = uploader;
     }
+
+    public User getBookedBy() {
+        return bookedBy;
+    }
+
+    public void setBookedBy(User bookedBy) {
+        this.bookedBy = bookedBy;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
-
-

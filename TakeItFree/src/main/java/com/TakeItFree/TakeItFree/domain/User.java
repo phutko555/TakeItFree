@@ -1,13 +1,10 @@
 package com.TakeItFree.TakeItFree.domain;
 
 import com.TakeItFree.TakeItFree.Security.Authority;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,26 +16,13 @@ public class User {
     private String username;
     private String password;
     private String name;
-private String role;
-
-
-    public String getRole() {
-        return role;
-    }
-
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    private String role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Cart cart;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Authority> authorities = new HashSet<>();
-
-    // Getters and setters
-
     public Long getId() {
         return id;
     }
@@ -69,6 +53,14 @@ private String role;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Cart getCart() {

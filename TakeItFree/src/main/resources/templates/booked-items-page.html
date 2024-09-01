@@ -1,50 +1,169 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Booked Items</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>TakeItFree - HomePage</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous">
+
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height:5000px;
+        }
+        .navbar-custom {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: #f8f9fa;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #f8f9fa;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd;
+        }
+        .container-custom {
+            background-color: #2b333c;
+    color: #f8f9fa;
+    padding: 90px;
+    margin-top: 5px;
+    margin: 0 auto;
+    width: 100%;
+    height:430px;
+
+        }
+        .heading {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .description {
+            font-size: 1.2rem;
+            color: #d1d1d1;
+            margin-bottom: 2rem;
+
+        }
+        .btn-explore {
+            background-color: teal;
+            border-color: #009688;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            margin-right: 5px;
+            border-radius:20px;
+        }
+
+        .couch-img {
+            max-width: 80%;
+            height: auto;
+            position:absolute;
+            right:7px;
+             top:140px;
+        }
+
+        .hovered1-button:hover{
+           background-color: black;
+
+        }
+        .hovered2-button{
+        background-color:transparent;
+        }
+         .hovered2-button:hover{
+          background-color: white;
+          color:black;
+
+        }
+
+        .frame-photo{
+        position: absolute;
+    top: 130px;
+    width: 100%;
+    max-width: 230px;
+        }
+         .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 7px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right:15px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        .logout-btn i {
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/cart">Cart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/book">Book an item</a>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/booked-items-page" style="margin-left:32px">TakeItFree</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/booked-items" style="color:#9aa7a1">Booked Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/book" aria-disabled="true" style="color:#9aa7a1;">Book an item</a>
+                </li>
+
+            </ul>
+            <form class="d-flex" role="search" action="/logout">
+                <div class="divider" style="height: 37px; border-left: 1px solid #ccc; margin: 0 15px;"></div>
+                <a href="/" id="login1">
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </a>
+                <a href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person align-middle"  viewBox="0 0 16 16" style="color:white" >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                </svg></a>
+            </form>
+        </div>
     </div>
 </nav>
 
-<div class="container mt-5">
-    <h1 class="mb-4">Booked Items</h1>
+<div class="container-fluid container-custom">
+    <div class="row align-items-center">
+        <div class="col-md-6" style="padding-left:40px;">
+            <div class="heading">Modern Interior<br> Design Studio</div>
+            <p class="description" style="font-size:14px">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Suspendisse tincidunt sagittis eros. Quisque quis<br> euismod lorem. Etiam sodales ac felis id interdum.
+            </p>
+            <a class="btn btn-explore hovered1-button" style="letter-spacing:2px; font-size:12px;" href="#" >EXPLORE</a>
+            <a class="btn btn-explore hovered2-button" style=" border:1px solid #8f8f8f; font-size:12px;letter-spacing:2px;" href="#">EXPLORE</a>
+        </div>
 
-    <div class="alert alert-dismissible fade show" role="alert" th:if="${message}">
-        <strong th:text="${messageType == 'success' ? 'Success!' : 'Error!'}"></strong> <span th:text="${message}"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="https://i.postimg.cc/nzytT41x/temp-Imageu8va-Ki.avif " width="100px" class="frame-photo">
+            <img src="https://i.postimg.cc/qMHrdv6g/Luna-Bluerightfrontview-copy-png.webp' border='0' alt='Luna-Bluerightfrontview-copy-png" alt="Blue Couch" class="couch-img">
 
-    <div class="row">
-        <div class="col-md-12" th:each="item : ${items}">
-            <div class="card mb-4">
-                <img th:src="@{${item.imagePath}}" alt="Item Image" class="card-img-top" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${item.title}"></h5>
-                    <p class="card-text" th:text="${item.description}"></p>
-                    <p class="font-weight-bold" th:text="'Price: ' + ${item.price}"></p>
-                </div>
-            </div>
         </div>
     </div>
-
-    <a href="/book" class="btn btn-secondary mt-3">Back to Home</a>
 </div>
+<br>
+<br>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

@@ -40,7 +40,7 @@ public class ItemService {
 
         Path path = Paths.get(uploadDir, fileName);
         try {
-            Files.createDirectories(path.getParent());  // Ensure the directory exists
+            Files.createDirectories(path.getParent());
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new IOException("Failed to store file", e);
@@ -49,23 +49,24 @@ public class ItemService {
         return "/uploads/" + fileName;
     }
 
-    public void saveItem(String title, String description, double price, String imagePath, String username) {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            Item item = new Item();
-            item.setTitle(title);
-            item.setDescription(description);
-            item.setPrice(price);
-            item.setImagePath(imagePath);
-            item.setUploader(user);
-            itemRepository.save(item);
-        } else {
-            throw new IllegalArgumentException("User not found with username: " + username);
-        }
+    public void saveItem(String title, String description, String country, String city, String phoneNumber, String imagePath, String username) {
+        Item item = new Item();
+        item.setTitle(title);
+        item.setDescription(description);
+        item.setCountry(country);
+        item.setCity(city);
+        item.setPhoneNumber(phoneNumber);
+        item.setImagePath(imagePath);
+        item.setUploader(userRepository.findByUsername(username));
+
+        itemRepository.save(item);
     }
 
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
-}
 
+    public List<Item> getItemsByUsername(String username) {
+        return itemRepository.findByUploader_Username(username);
+    }
+}

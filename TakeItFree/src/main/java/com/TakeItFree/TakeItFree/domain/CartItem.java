@@ -18,8 +18,6 @@ public class CartItem {
     private Item item;
 
     private int quantity;
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }

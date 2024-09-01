@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,6 +34,7 @@ public class UserController {
         this.itemService = itemService;
         this.cartService = cartService;
     }
+
     private void addUserDetailsToModel(Model model, Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
@@ -49,6 +51,7 @@ public class UserController {
             model.addAttribute("role", "Unknown");
         }
     }
+
     @GetMapping("/upload")
     @PreAuthorize("hasRole('UPLOADER')")
     public String showUploadPage(Model model, Authentication authentication) {
@@ -60,17 +63,20 @@ public class UserController {
     @PreAuthorize("hasRole('UPLOADER')")
     public String uploadItem(@RequestParam String title,
                              @RequestParam String description,
-                             @RequestParam double price,
+                             @RequestParam String country,
+                             @RequestParam String city,
+                             @RequestParam String phoneNumber,
                              @RequestParam("image") MultipartFile image,
                              Authentication authentication,
                              RedirectAttributes redirectAttributes) {
         String username = authentication.getName();
         try {
             String imagePath = itemService.saveImage(image);
-            itemService.saveItem(title, description, price, imagePath, username);
+            itemService.saveItem(title, description, country, city, phoneNumber, imagePath, username);
             redirectAttributes.addFlashAttribute("message", "Item uploaded successfully!");
             redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (Exception e) {
+            e.printStackTrace(); // Log the error
             redirectAttributes.addFlashAttribute("message", "Failed to upload item. Please try again.");
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
@@ -85,6 +91,7 @@ public class UserController {
         model.addAttribute("items", items);
         return "book";
     }
+
     @PostMapping("/cart/add/{id}")
     @PreAuthorize("hasRole('BOOKER')")
     public String addToCart(@PathVariable Long id, Authentication authentication, RedirectAttributes redirectAttributes) {
@@ -95,14 +102,13 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message", "Item added to cart successfully!");
             redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (Exception e) {
+            e.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "Failed to add item to cart.");
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
         return "redirect:/book";
     }
 
-
-    // Show the cart
     @GetMapping("/cart")
     public String showCart(Model model, Authentication authentication) {
         String username = authentication.getName();
@@ -113,7 +119,6 @@ public class UserController {
         return "cart";
     }
 
-
     @GetMapping("/booked-items")
     @PreAuthorize("hasRole('BOOKER')")
     public String showBookedItems(Model model, Authentication authentication) {
@@ -123,8 +128,9 @@ public class UserController {
 
         model.addAttribute("items", bookedItems);
         addUserDetailsToModel(model, authentication);
-        return "booked-items-page";
+        return "booked-items";
     }
+
     @PostMapping("/cart/bookItem")
     @PreAuthorize("hasRole('BOOKER')")
     public String bookItem(@RequestParam Long itemId, @RequestParam Long userId, RedirectAttributes redirectAttributes) {
@@ -133,11 +139,13 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message", "Item booked successfully!");
             redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (Exception e) {
+            e.printStackTrace(); // Log the error
             redirectAttributes.addFlashAttribute("message", "Failed to book item.");
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
         return "redirect:/cart";
     }
+
     @GetMapping("/my-items")
     @PreAuthorize("hasRole('UPLOADER')")
     public String showMyItems(Model model, Authentication authentication) {
@@ -150,12 +158,21 @@ public class UserController {
     }
 
     @GetMapping("/items")
-    public String showItems(Model model, Authentication authentication) {
-        addUserDetailsToModel(model, authentication);
-        List<Item> items = itemService.getAllItems();
+    public String getUserItems(Model model, Authentication authentication) {
+        String username = authentication.getName();
+        List<Item> items = itemService.getItemsByUsername(username);
         model.addAttribute("items", items);
         return "items";
     }
+    @GetMapping("/booked-items-page")
+    public String getBookedPage(Model model, Authentication authentication){
+        String username = authentication.getName();
+        Long userId = userService.findUserIdByUsername(username);
+        List<Item> bookedItems = cartService.getBookedItemsByUserId(userId);
+
+        model.addAttribute("items", bookedItems);
+        addUserDetailsToModel(model, authentication);
+        return "booked-items-page";
+    }
 
 }
-

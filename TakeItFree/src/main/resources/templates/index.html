@@ -1,54 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TakeItFree - HomePage</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous">
-
-    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height:5000px;
+        }
+        .navbar-custom {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: #f8f9fa;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #f8f9fa;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd;
+        }
+        .container-custom {
+            background-color: #2b333c;
+    color: #f8f9fa;
+    padding: 90px;
+    margin-top: 5px;
+    margin: 0 auto;
+    width: 100%;
+    height:430px;
+
+        }
+        .heading {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .description {
+            font-size: 1.2rem;
+            color: #d1d1d1;
+            margin-bottom: 2rem;
+
+        }
+        .btn-explore {
+            background-color: teal;
+            border-color: #009688;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            margin-right: 5px;
+            border-radius:20px;
+        }
+
+        .couch-img {
+            max-width: 80%;
+            height: auto;
+            position:absolute;
+            right:7px;
+             top:140px;
+        }
+
+        .hovered1-button:hover{
+           background-color: black;
+
+        }
+        .hovered2-button{
+        background-color:transparent;
+        }
+         .hovered2-button:hover{
+          background-color: white;
+          color:black;
+
+        }
+
+        .frame-photo{
+        position: absolute;
+    top: 130px;
+    width: 100%;
+    max-width: 230px;
+        }
+    </style>
 </head>
 <body>
-<script type="text/javascript">
-    $(function () {
-        $("#login1").click(function() {
-            window.location.href = "/login";
-        });
-    });
-
-</script>
-<nav class="navbar navbar-expand-lg" style="background-color:#36454f">
+<nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color:white">TakeItFree</a>
+        <a class="navbar-brand" href="#" style="margin-left:32px">TakeItFree</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" style="border-bottom: 2px solid teal; color:white; padding-bottom: 2px;">Feature</a>
+                    <a class="nav-link" href="/uploaded-items" style="border-bottom:3px solid teal; padding-bottom:3px;">Uploaded Items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/items"aria-disabled="true" style="color:#9aa7a1;" id="uploaded-items">Uploaded Items</a>
+                    <a class="nav-link" href="/booked-items" style="color:#9aa7a1">Booked Items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true" style="color:#9aa7a1;">Booked Items</a>
+                    <a class="nav-link" href="/booked-items"style="color:#9aa7a1" >Booked Items</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="/booked-items"style="color:#9aa7a1">Booked Items</a>
+                </li>
             </ul>
             <form class="d-flex" role="search">
                 <div class="divider" style="height: 37px; border-left: 1px solid #ccc; margin: 0 15px;"></div>
-                <a href="#" id="login1"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person align-middle"  viewBox="0 0 16 16" style="color:white; margin-right:10px">
-                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                </svg></a>
-                <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person align-middle"  viewBox="0 0 16 16" style="color:white" >
+                <a href="/login" id="login1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person align-middle" viewBox="0 0 16 16" style="color:white; margin-right:10px">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                    </svg>
+                </a>
+                <a href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person align-middle"  viewBox="0 0 16 16" style="color:white" >
                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                </svg>
+                </svg></a>
             </form>
         </div>
     </div>
 </nav>
 
+<div class="container-fluid container-custom">
+    <div class="row align-items-center">
+        <div class="col-md-6" style="padding-left:40px;">
+            <div class="heading">Modern Interior<br> Design Studio</div>
+            <p class="description" style="font-size:14px">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Suspendisse tincidunt sagittis eros. Quisque quis<br> euismod lorem. Etiam sodales ac felis id interdum.
+            </p>
+            <a class="btn btn-explore hovered1-button" style="letter-spacing:2px; font-size:12px;" href="#" >EXPLORE</a>
+            <a class="btn btn-explore hovered2-button" style=" border:1px solid #8f8f8f; font-size:12px;letter-spacing:2px;" href="#">EXPLORE</a>
+        </div>
 
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="https://i.postimg.cc/nzytT41x/temp-Imageu8va-Ki.avif " width="100px" class="frame-photo">
+            <img src="https://i.postimg.cc/qMHrdv6g/Luna-Bluerightfrontview-copy-png.webp' border='0' alt='Luna-Bluerightfrontview-copy-png" alt="Blue Couch" class="couch-img">
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<h1 class="mb-4">Available Items for Booking</h1>
+
+<div class="row">
+
+    <div class="col-md-4" th:each="item : ${items}">
+        <div class="card mb-4">
+            <img th:src="@{${item.imagePath}}" alt="Item Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+
+            <div class="card-body">
+                <h5 class="card-title" th:text="${item.title}"></h5>
+                <p class="card-text" style="color:green">Book an item to see the Description</p>
+
+
+                <form th:action="@{/cart/add/{id}(id=${item.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO6lLf0g8c9FLjF1W4d3oRo4rV2gD15T2cFkt1/w2JzvY3k53dD1E" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl3+f2C4y2e1/Z0x2Gq5h5gBJS0v0VwWke7Qp2sSxkS" crossorigin="anonymous"></script>
 </body>
 </html>

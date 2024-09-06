@@ -49,7 +49,7 @@ public class UserController {
                 if (user != null) {
                     model.addAttribute("username", username);
                     model.addAttribute("role", user.getRole());
-                    model.addAttribute("user", user); // Ensure the user object is available in the template
+                    model.addAttribute("user", user);
                 } else {
                     model.addAttribute("username", "Guest");
                     model.addAttribute("role", "Unknown");

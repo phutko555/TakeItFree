@@ -12,10 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
     @Autowired
     private CustomAuthenticationSuccessHandler successHandler;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -24,8 +22,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/upload","/items","/my-items").hasRole("UPLOADER")
-                        .requestMatchers("/book","/booked-items","/booked-items-page","/cart").hasRole("BOOKER")
+                        .requestMatchers("/upload","/items","/uploaders-home-page").hasRole("UPLOADER")
+                        .requestMatchers("/book","/booked-items","/bookers-home-page","/cart").hasRole("BOOKER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

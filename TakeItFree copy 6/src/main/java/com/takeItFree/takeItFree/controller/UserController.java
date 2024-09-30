@@ -151,7 +151,6 @@ public class UserController {
         List<CartItem> cartItems = cartService.getCartItemsByUserId(userId);
         model.addAttribute("cartItems", cartItems != null ? cartItems : Collections.emptyList());
         model.addAttribute("user", user);
-
         return "cart";
     }
 
@@ -186,7 +185,6 @@ public class UserController {
     }
 
     @GetMapping("/uploaders-home-page")
-    @PreAuthorize("hasRole('UPLOADER')")
     public String showMyItems(Model model, Authentication authentication) {
         String username = authentication.getName();
         Long userId = userService.findUserIdByUsername(username);

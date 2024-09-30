@@ -17,7 +17,6 @@ import java.util.List;
 
 @Service
 public class CartService {
-
     @Autowired
     private CartRepository cartRepository;
 
@@ -39,8 +38,6 @@ public class CartService {
     public List<Item> getBookedItemsByUserId(Long userId) {
         return itemRepository.findByBookedByUserId(userId);
     }
-
-
 
     public void addItemToCart(Long userId, Long itemId, int quantity) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));

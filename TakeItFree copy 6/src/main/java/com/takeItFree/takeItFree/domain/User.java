@@ -16,7 +16,6 @@ public class User {
     private String password;
     private String name;
     private String role;
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Cart cart;
 

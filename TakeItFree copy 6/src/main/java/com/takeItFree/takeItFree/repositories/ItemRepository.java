@@ -11,8 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    List<Item> findByBookedBy(User user);
     Optional<Item> findById(Long id);
     List<Item> findByUploader_Username(String username);
     List<Item> findByUploader_Id(Long userId);
